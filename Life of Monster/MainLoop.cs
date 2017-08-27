@@ -17,35 +17,14 @@ namespace Life_of_Monster
         {
             textureManager.BasePathForImages = "IMG";
         }
-        private bool loadAllTextures()
-        {
-            try
-            {
-                List<string> files = new List<string>(Directory.GetFiles(textureManager.BasePathForImages));
-                for (int i = 0; i < files.Count; i++)
-                {
-                    string actualPath = files[i];
-                    int dotLocation = actualPath.IndexOf('.');
-                    string ImgName = actualPath.Substring(4, dotLocation-4); ///four because directory wont change also all textures will be in png
-                    Texture tempTexture = new Texture(actualPath);
-                    textureManager.Textures.Add(ImgName, tempTexture);
-                    logger.Log(LogLevel.Trace, "Reading and adding image to Manager: {0}, name: {1}", actualPath, ImgName);
-                }
-                
-            }
-            catch (Exception e)
-            {
-                logger.Log(LogLevel.Fatal, "Cannot read image, exiting because: {0}", e.Message);
-               return false;
-            }
-            return true;
-        }
+      
         private bool Init()
         {
             try
             {
                 window = new RenderWindow(new VideoMode(800, 600), "Life of Monsters");
                 window.Closed += Window_Closed;
+                window.SetFramerateLimit(60);
                 logger.Log(LogLevel.Trace, "Opened window");
 
             }
@@ -54,7 +33,7 @@ namespace Life_of_Monster
                 logger.Log(LogLevel.Fatal, "Cannot open window");
                 return false;
             }
-            if(loadAllTextures())
+            if(textureManager.loadAllTextures() && sceneManager.ReadSceneFilesToMemory())
             {
                 return true;
             }
@@ -89,5 +68,6 @@ namespace Life_of_Monster
         private RenderWindow window;
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private TextureManager textureManager = new TextureManager();
+        private SceneManager sceneManager = new SceneManager();
     }
 }
