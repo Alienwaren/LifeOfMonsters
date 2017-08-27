@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scene>
+  <background>
+    <texture>
+      <name>
+        MainMenuBg
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        0
+      </origin>
+      <origin axis="y">
+        0
+      </origin>
+      <size>
+        null
+      </size>
+    </texture>
+  </background>
+  <layer n="1">
+    <texture>
+      <name>
+        Title
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        0
+      </origin>
+      <origin axis="y">
+        0
+      </origin>
+      <size>
+        null
+      </size>
+    </texture>
+  </layer>
+</scene>
