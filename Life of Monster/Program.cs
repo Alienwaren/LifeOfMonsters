@@ -8,8 +8,11 @@ namespace Life_of_Monster
 {
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
+            MainLoop loop = new MainLoop();
+            return loop.Loop();
+           
         }
     }
 }
