@@ -26,6 +26,8 @@ namespace Life_of_Monster
                 window.Closed += Window_Closed;
                 window.SetFramerateLimit(60);
                 logger.Log(LogLevel.Trace, "Opened window");
+                sceneManager.texturesManager = textureManager;
+                sceneManager.TargetRenderWindow = window;
 
             }
             catch (Exception e)
@@ -52,14 +54,11 @@ namespace Life_of_Monster
             if (Init())
             {
                 returnCode = 0;
-                Renderable render = new Renderable(1);
-                render.Body = new Sprite(textureManager.Textures["Title"]);
-                render.target = window;
                 while(window.IsOpen())
                 {
                     window.DispatchEvents();
                     window.Clear();
-                    render.Draw();
+                    sceneManager.DrawScene("MainMenu");
                     window.Display();
                 }
             }

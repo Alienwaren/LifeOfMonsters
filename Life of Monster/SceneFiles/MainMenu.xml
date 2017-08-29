@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <scene>
+  <name>
+    MainMenu
+  </name>
   <background>
     <texture>
       <name>
@@ -17,25 +20,40 @@
       <size>
         null
       </size>
+      <position axis="x">
+        0
+      </position>
+      <position axis="y">
+        0
+      </position>
     </texture>
   </background>
-  <layer n="1">
+  <layer n="0">
     <texture>
       <name>
-        Title
+        Title 
       </name>
       <intrect>
         null
       </intrect>
       <origin axis="x">
-        0
+        192
       </origin>
       <origin axis="y">
-        0
+        18
       </origin>
       <size>
         null
       </size>
+      <position axis="x">
+        400
+      </position>
+      <position axis="y">
+        100
+      </position>
     </texture>
   </layer>
+  <layerCount>
+    1
+  </layerCount>
 </scene>
