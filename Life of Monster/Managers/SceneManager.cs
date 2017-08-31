@@ -113,7 +113,7 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[i].Origin = new SFML.Window.Vector2f(x, y);
+                            tempScene.Layers[j].Origin = new SFML.Window.Vector2f(x, y);
 
                         }
                         else //second provided is x then
@@ -124,7 +124,7 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[i].Origin = new SFML.Window.Vector2f(x, y);
+                            tempScene.Layers[j].Origin = new SFML.Window.Vector2f(x, y);
                         }
                         if (layerPositions[0].Attributes[0].Value == "x") //first provided is x
                         {
@@ -134,7 +134,7 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[i].Position = new SFML.Window.Vector2f(x, y);
+                            tempScene.Layers[j].Position = new SFML.Window.Vector2f(x, y);
 
                         }
                         else //second provided is x then
@@ -145,7 +145,7 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[i].Position = new SFML.Window.Vector2f(x, y);
+                            tempScene.Layers[j].Position = new SFML.Window.Vector2f(x, y);
                         }
                     }
                     tempScene.Target = TargetRenderWindow;
@@ -160,18 +160,7 @@ namespace Life_of_Monster.Managers
            
             return true;
         }
-        public void DrawScene(string scenename)
-        {
-            if(!string.IsNullOrEmpty(scenename))
-            {
-                Scene tmp = Scenes[scenename];
-                tmp.Target.Draw(tmp.Background);
-                for (int i = 0; i < tmp.Layers.Count; i++)
-                {
-                    tmp.Target.Draw(tmp.Layers[i]);
-                }
-            }
-        }
+
         private const string baseSceneFilesPath = "SceneFiles";
         public TextureManager texturesManager{ private get; set; }
         public Dictionary<string, Logic.Scene> Scenes { get; private set; }

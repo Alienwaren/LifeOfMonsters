@@ -13,7 +13,7 @@ namespace Life_of_Monster.Logic
             Background = new Sprite();
             Layers = new List<Sprite>();
         }
-        void DrawScene()
+        public void DrawScene()
         {
             if(Target != null)
             {

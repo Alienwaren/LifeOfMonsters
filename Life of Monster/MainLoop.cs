@@ -33,12 +33,14 @@ namespace Life_of_Monster
             catch (Exception e)
             {
                 logger.Log(LogLevel.Fatal, "Cannot open window");
+                returnCode = -2;
                 return false;
             }
             if(textureManager.loadAllTextures() && sceneManager.ReadSceneFilesToMemory())
             {
                 return true;
             }
+            returnCode = -3;
             return false;
         }
 
@@ -50,15 +52,21 @@ namespace Life_of_Monster
 
         public int Loop()
         {    
-            int returnCode = -1;
+            ///
+            ///DO NOT ADD CODE BEFORE THIS vvvvvvvvvvvv
+            ///          
             if (Init())
             {
+                Scene mainMenu = sceneManager.Scenes["MainMenu"];
                 returnCode = 0;
                 while(window.IsOpen())
                 {
                     window.DispatchEvents();
                     window.Clear();
-                    sceneManager.DrawScene("MainMenu");
+                    if(mainMenu != null)
+                    {
+                        mainMenu.DrawScene();
+                    }
                     window.Display();
                 }
             }
@@ -68,5 +76,7 @@ namespace Life_of_Monster
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private TextureManager textureManager = new TextureManager();
         private SceneManager sceneManager = new SceneManager();
+        int returnCode = -1;
+
     }
 }

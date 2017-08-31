@@ -53,7 +53,95 @@
       </position>
     </texture>
   </layer>
+  <layer n="1">
+    <texture>
+      <name>
+        StartGame
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        88
+      </origin>
+      <origin axis="y">
+        16
+      </origin>
+      <position axis="x">
+        400
+      </position>
+      <position axis="y">
+        200
+      </position>
+    </texture>
+  </layer>
+  <layer n="2">
+    <texture>
+      <name>
+        LoadGame
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        88
+      </origin>
+      <origin axis="y">
+        16
+      </origin>
+      <position axis="x">
+        393
+      </position>
+      <position axis="y">
+        250
+      </position>
+    </texture>
+  </layer>
+  <layer n="3">
+    <texture>
+      <name>
+        Options
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        62
+      </origin>
+      <origin axis="y">
+        16
+      </origin>
+      <position axis="x">
+        393
+      </position>
+      <position axis="y">
+        300
+      </position>
+    </texture>
+  </layer>
+  <layer n="4">
+    <texture>
+      <name>
+        ExitToWindows
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        29
+      </origin>
+      <origin axis="y">
+        12
+      </origin>
+      <position axis="x">
+        393
+      </position>
+      <position axis="y">
+        350
+      </position>
+    </texture>
+  </layer>
   <layerCount>
-    1
+    5
   </layerCount>
 </scene>
