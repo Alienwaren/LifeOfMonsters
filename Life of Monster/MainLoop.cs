@@ -66,25 +66,25 @@ namespace Life_of_Monster
             ///          
             if (Init())
             {
-                //Scene mainMenu = sceneManager.Scenes["MainMenu"];
-                btn = new TextButton
-                {
-                    GameRenderWindow = window,
-                    buttonText = new Sprite(textureManager.Textures["Options"])
-                };
-                btn.ButtonClicked += Btn_ButtonClicked;
-                btn.buttonText.Position = new Vector2f(300, 100);
-                btn.buttonText.Origin = new Vector2f(btn.buttonText.GetGlobalBounds().Height / 2, btn.buttonText.GetGlobalBounds().Width / 2);
+                Scene mainMenu = sceneManager.Scenes["MainMenu"];
+                //btn = new TextButton
+                //{
+                //    GameRenderWindow = window,
+                //    buttonText = new Sprite(textureManager.Textures["Options"])
+                //};
+                //btn.ButtonClicked += Btn_ButtonClicked;
+                //btn.buttonText.Position = new Vector2f(300, 100);
+                //btn.buttonText.Origin = new Vector2f(btn.buttonText.GetGlobalBounds().Height / 2, btn.buttonText.GetGlobalBounds().Width / 2);
                 returnCode = 0;
                 while(window.IsOpen())
                 {
                     window.DispatchEvents();
                     window.Clear();
-                    //if(mainMenu != null)
-                    //{
-                    //    mainMenu.DrawScene();
-                    //}
-                    btn.DrawButton();
+                    if (mainMenu != null)
+                    {
+                        mainMenu.DrawScene();
+                    }
+                    //  btn.DrawButton();
                     window.Display();
                 }
             }

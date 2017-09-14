@@ -102,7 +102,8 @@ namespace Life_of_Monster.Managers
                         XmlNode layerTexture = layer["texture"];
                         string layerTextureName = layerTexture["name"].InnerText;
                         layerTextureName = Regex.Replace(layerTextureName, @"\s+", string.Empty);
-                        tempScene.Layers.Add(new Sprite(texturesManager.Textures[layerTextureName]));
+                        Sprite tempomarySprite = new Sprite(texturesManager.Textures[layerTextureName]);
+                        tempScene.Layers.Add(tempomarySprite);
                         XmlNodeList layerOrigins = ((XmlElement)layerTexture).GetElementsByTagName("origin");
                         XmlNodeList layerPositions = ((XmlElement)layerTexture).GetElementsByTagName("position");
                         if (layerOrigins[0].Attributes[0].Value == "x") //first provided is x
@@ -113,8 +114,12 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[j].Origin = new SFML.Window.Vector2f(x, y);
-
+                            Sprite temp = tempScene.Layers[j] as Sprite;
+                            if (temp != null)
+                            {
+                                temp.Origin = new SFML.Window.Vector2f(x, y);
+                            }
+                            tempScene.Layers[j] = temp;
                         }
                         else //second provided is x then
                         {
@@ -124,7 +129,12 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[j].Origin = new SFML.Window.Vector2f(x, y);
+                            Sprite temp = tempScene.Layers[j] as Sprite;
+                            if (temp != null)
+                            {
+                                temp.Origin = new SFML.Window.Vector2f(x, y);
+                            }
+                            tempScene.Layers[j] = temp;
                         }
                         if (layerPositions[0].Attributes[0].Value == "x") //first provided is x
                         {
@@ -134,7 +144,12 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[j].Position = new SFML.Window.Vector2f(x, y);
+                            Sprite temp = tempScene.Layers[j] as Sprite;
+                            if (temp != null)
+                            {
+                                temp.Position = new SFML.Window.Vector2f(x, y);
+                            }
+                            tempScene.Layers[j] = temp;
 
                         }
                         else //second provided is x then
@@ -145,7 +160,12 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            tempScene.Layers[j].Position = new SFML.Window.Vector2f(x, y);
+                            Sprite temp = tempScene.Layers[j] as Sprite;
+                            if (temp != null)
+                            {
+                                temp.Position = new SFML.Window.Vector2f(x, y);
+                            }
+                            tempScene.Layers[j] = temp;
                         }
                     }
                     tempScene.Target = TargetRenderWindow;
