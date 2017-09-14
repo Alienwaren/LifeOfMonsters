@@ -61,7 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\TextButton.cs" />
     <Compile Include="Logic\Entity.cs" />
+    <Compile Include="Logic\GameClock.cs" />
     <Compile Include="Logic\Renderable.cs" />
     <Compile Include="Logic\Scene.cs" />
     <Compile Include="MainLoop.cs" />
