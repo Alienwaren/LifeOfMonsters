@@ -67,6 +67,7 @@
     <Compile Include="Logic\Renderable.cs" />
     <Compile Include="Logic\Scene.cs" />
     <Compile Include="MainLoop.cs" />
+    <Compile Include="Managers\GameStateManager.cs" />
     <Compile Include="Managers\SceneManager.cs" />
     <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Program.cs" />

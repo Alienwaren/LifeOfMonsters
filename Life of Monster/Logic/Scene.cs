@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using Life_of_Monster.GUI;
 using Life_of_Monster.Logic;
+using Life_of_Monster.Managers;
 namespace Life_of_Monster.Logic
 {
     public class Scene : Entity
@@ -15,6 +16,31 @@ namespace Life_of_Monster.Logic
             Background = new Sprite();
             Layers = new List<object>();
         }
+        public void InitEvents()
+        {
+            foreach (var item in Layers)
+            {
+                if (item is TextButton)
+                {
+                    TextButton temp = item as TextButton;
+                    temp.ButtonClicked += ButtonClicked;
+                    temp.GameRenderWindow = Target;
+                }
+            }
+        }
+
+        private void ButtonClicked(object sender, EventArgs e)
+        {
+            if(sender is TextButton)
+            {
+                TextButton temp = sender as TextButton;
+                if(temp.Name == "ExitToWindows")
+                {
+                    GameStateManager.GameState = GAMESTATES.HALT;
+                }
+            }
+        }
+
         public void DrawScene()
         {
             if(Target != null)
@@ -39,6 +65,18 @@ namespace Life_of_Monster.Logic
                         }
                     }
                 }
+            }
+        }
+        public void DispatchSceneEvents()
+        {
+            foreach (var item in Layers)
+            {
+                if(item is TextButton)
+                {
+                    TextButton temp = item as TextButton;
+                    temp.GetMousePos();
+                }
+
             }
         }
         public RenderWindow Target { get; set; }

@@ -198,6 +198,7 @@ namespace Life_of_Monster.Managers
                             else if (tempObj is TextButton)
                             {
                                 TextButton temp = tempObj as TextButton;
+                                temp.Name = layerTextureName;
                                 if (temp != null)
                                 {
                                     temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
@@ -228,6 +229,7 @@ namespace Life_of_Monster.Managers
                             else if (tempObj is TextButton)
                             {
                                 TextButton temp = tempObj as TextButton;
+                                temp.Name = layerTextureName;
                                 if (temp != null)
                                 {
                                     temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
@@ -237,7 +239,10 @@ namespace Life_of_Monster.Managers
                         }
                     }
                     tempScene.Target = TargetRenderWindow;
+                    tempScene.InitEvents();
+                    
                     Scenes.Add(sceneName, tempScene);
+                    
                 }
                 catch (Exception e)
                 {
@@ -250,14 +255,28 @@ namespace Life_of_Monster.Managers
         }
         public void DrawActiveScene()
         {
-            Scene scene;
-            Scenes.TryGetValue(ActiveScene, out scene);
-            if(scene != null)
+            if (!String.IsNullOrEmpty(GameStateManager.ActualScene))
             {
-                scene.DrawScene();
+                Scene scene;
+                Scenes.TryGetValue(GameStateManager.ActualScene, out scene);
+                if (scene != null)
+                {
+                    scene.DrawScene();
+                }
             }
         }
-        public string ActiveScene { get; set; }
+        public void DispatchActiveSceneEvents()
+        {
+            if (!String.IsNullOrEmpty(GameStateManager.ActualScene))
+            {
+                Scene scene;
+                Scenes.TryGetValue(GameStateManager.ActualScene, out scene);
+                if (scene != null)
+                {
+                    scene.DispatchSceneEvents();
+                } 
+            }
+        }
         private const string baseSceneFilesPath = "SceneFiles";
         public TextureManager texturesManager{ private get; set; }
         public Dictionary<string, Logic.Scene> Scenes { get; private set; }

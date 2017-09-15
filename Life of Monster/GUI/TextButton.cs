@@ -54,5 +54,6 @@ namespace Life_of_Monster.GUI
         public Sprite buttonText { get; set; }
         public RenderWindow GameRenderWindow{ get; set; }
         public bool WasClicked { get; set; }
+        
     }
 }

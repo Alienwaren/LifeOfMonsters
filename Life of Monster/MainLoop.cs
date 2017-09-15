@@ -40,6 +40,7 @@ namespace Life_of_Monster
             }
             if(textureManager.loadAllTextures() && sceneManager.ReadSceneFilesToMemory())
             {
+                GameStateManager.ActualScene = "MainMenu";
                 return true;
             }
             returnCode = -3;
@@ -47,6 +48,7 @@ namespace Life_of_Monster
         }
         private void GuiUpdate(object sender, System.Timers.ElapsedEventArgs e)
         {
+            sceneManager.DispatchActiveSceneEvents();
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -62,12 +64,16 @@ namespace Life_of_Monster
             ///          
             if (Init())
             {
-                sceneManager.ActiveScene = "MainMenu";
+                
                 returnCode = 0;
                 while(window.IsOpen())
                 {
                     window.DispatchEvents();
                     window.Clear();
+                    if(GameStateManager.GameState == GAMESTATES.HALT)
+                    {
+                        Window_Closed(this, EventArgs.Empty);
+                    }
                     sceneManager.DrawActiveScene();
                     window.Display();
                 }
