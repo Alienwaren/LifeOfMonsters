@@ -9,7 +9,7 @@ using System.IO;
 using Life_of_Monster.Logic;
 using SFML.Graphics;
 using System.Text.RegularExpressions;
-
+using Life_of_Monster.GUI;
 namespace Life_of_Monster.Managers
 {
     public class SceneManager
@@ -102,8 +102,21 @@ namespace Life_of_Monster.Managers
                         XmlNode layerTexture = layer["texture"];
                         string layerTextureName = layerTexture["name"].InnerText;
                         layerTextureName = Regex.Replace(layerTextureName, @"\s+", string.Empty);
-                        Sprite tempomarySprite = new Sprite(texturesManager.Textures[layerTextureName]);
-                        tempScene.Layers.Add(tempomarySprite);
+                        XmlNodeList layerType = ((XmlElement)layer).GetElementsByTagName("type");
+                        string layerTypeStr = layerType[0].InnerText;
+                        layerTypeStr = Regex.Replace(layerTypeStr, @"\s+", string.Empty);
+                        if (layerTypeStr == "Image")
+                        {
+                            Sprite tempomarySprite = new Sprite(texturesManager.Textures[layerTextureName]);
+                            tempScene.Layers.Add(tempomarySprite);
+                        }
+                        else if (layerTypeStr == "TextButton")
+                        {
+                            TextButton tempButton = new TextButton();
+                            tempButton.buttonText.Texture = texturesManager.Textures[layerTextureName];
+                            tempScene.Layers.Add(tempButton);
+                        }
+
                         XmlNodeList layerOrigins = ((XmlElement)layerTexture).GetElementsByTagName("origin");
                         XmlNodeList layerPositions = ((XmlElement)layerTexture).GetElementsByTagName("position");
                         if (layerOrigins[0].Attributes[0].Value == "x") //first provided is x
@@ -114,12 +127,25 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            Sprite temp = tempScene.Layers[j] as Sprite;
-                            if (temp != null)
+                            object tempObj = tempScene.Layers[j];
+                            if(tempObj is Sprite)
                             {
-                                temp.Origin = new SFML.Window.Vector2f(x, y);
+                                Sprite temp = tempObj as Sprite;
+                                if (temp != null)
+                                {
+                                    temp.Origin = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+
+                            }else if(tempObj is TextButton)
+                            {
+                                TextButton temp = tempObj as TextButton;
+                                if (temp != null)
+                                {
+                                    temp.buttonText.Origin = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
                             }
-                            tempScene.Layers[j] = temp;
                         }
                         else //second provided is x then
                         {
@@ -129,12 +155,26 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            Sprite temp = tempScene.Layers[j] as Sprite;
-                            if (temp != null)
+                            object tempObj = tempScene.Layers[j];
+                            if (tempObj is Sprite)
                             {
-                                temp.Origin = new SFML.Window.Vector2f(x, y);
+                                Sprite temp = tempObj as Sprite;
+                                if (temp != null)
+                                {
+                                    temp.Origin = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+
                             }
-                            tempScene.Layers[j] = temp;
+                            else if (tempObj is TextButton)
+                            {
+                                TextButton temp = tempObj as TextButton;
+                                if (temp != null)
+                                {
+                                    temp.buttonText.Origin = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+                            }
                         }
                         if (layerPositions[0].Attributes[0].Value == "x") //first provided is x
                         {
@@ -144,12 +184,26 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            Sprite temp = tempScene.Layers[j] as Sprite;
-                            if (temp != null)
+                            object tempObj = tempScene.Layers[j];
+                            if (tempObj is Sprite)
                             {
-                                temp.Position = new SFML.Window.Vector2f(x, y);
+                                Sprite temp = tempObj as Sprite;
+                                if (temp != null)
+                                {
+                                    temp.Position = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+
                             }
-                            tempScene.Layers[j] = temp;
+                            else if (tempObj is TextButton)
+                            {
+                                TextButton temp = tempObj as TextButton;
+                                if (temp != null)
+                                {
+                                    temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+                            }
 
                         }
                         else //second provided is x then
@@ -160,12 +214,26 @@ namespace Life_of_Monster.Managers
                             yStr = Regex.Replace(yStr, @"\s+", string.Empty);
                             int x = int.Parse(xStr);
                             int y = int.Parse(yStr);
-                            Sprite temp = tempScene.Layers[j] as Sprite;
-                            if (temp != null)
+                            object tempObj = tempScene.Layers[j];
+                            if (tempObj is Sprite)
                             {
-                                temp.Position = new SFML.Window.Vector2f(x, y);
+                                Sprite temp = tempObj as Sprite;
+                                if (temp != null)
+                                {
+                                    temp.Position = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+
                             }
-                            tempScene.Layers[j] = temp;
+                            else if (tempObj is TextButton)
+                            {
+                                TextButton temp = tempObj as TextButton;
+                                if (temp != null)
+                                {
+                                    temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
+                                }
+                                tempScene.Layers[j] = temp;
+                            }
                         }
                     }
                     tempScene.Target = TargetRenderWindow;

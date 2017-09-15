@@ -13,6 +13,7 @@ namespace Life_of_Monster.GUI
         public TextButton()
         {
             WasClicked = false;
+            buttonText = new Sprite();
         }
         public event EventHandler ButtonClicked;
         protected virtual void OnButtonClicked(EventArgs e)

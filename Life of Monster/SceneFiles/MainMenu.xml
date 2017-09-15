@@ -26,6 +26,9 @@
       <position axis="y">
         0
       </position>
+      <type>
+        Image
+      </type>
     </texture>
   </background>
   <layer n="0">
@@ -51,6 +54,9 @@
       <position axis="y">
         100
       </position>
+      <type>
+        TextButton
+      </type>
     </texture>
   </layer>
   <layer n="1">
@@ -73,6 +79,9 @@
       <position axis="y">
         200
       </position>
+      <type>
+        TextButton
+      </type>
     </texture>
   </layer>
   <layer n="2">
@@ -95,6 +104,9 @@
       <position axis="y">
         250
       </position>
+      <type>
+        TextButton
+      </type>
     </texture>
   </layer>
   <layer n="3">
@@ -117,6 +129,9 @@
       <position axis="y">
         300
       </position>
+      <type>
+        TextButton
+      </type>
     </texture>
   </layer>
   <layer n="4">
@@ -139,6 +154,9 @@
       <position axis="y">
         350
       </position>
+      <type>
+        TextButton
+      </type>
     </texture>
   </layer>
   <layerCount>
