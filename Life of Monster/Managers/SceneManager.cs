@@ -248,7 +248,16 @@ namespace Life_of_Monster.Managers
            
             return true;
         }
-
+        public void DrawActiveScene()
+        {
+            Scene scene;
+            Scenes.TryGetValue(ActiveScene, out scene);
+            if(scene != null)
+            {
+                scene.DrawScene();
+            }
+        }
+        public string ActiveScene { get; set; }
         private const string baseSceneFilesPath = "SceneFiles";
         public TextureManager texturesManager{ private get; set; }
         public Dictionary<string, Logic.Scene> Scenes { get; private set; }

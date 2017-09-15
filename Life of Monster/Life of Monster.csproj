@@ -90,6 +90,7 @@
     </Content>
     <Content Include="SceneFiles\MainMenu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="App.config" />
     <Content Include="IMG\Title.png">

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SFML.Graphics;
+using Life_of_Monster.GUI;
+using Life_of_Monster.Logic;
 namespace Life_of_Monster.Logic
 {
     public class Scene : Entity
@@ -27,6 +29,13 @@ namespace Life_of_Monster.Logic
                         if(tempObj != null)
                         {
                             Target.Draw(tempObj);
+                        }
+                    }else if(Layers[i] is TextButton)
+                    {
+                        TextButton tempObj = Layers[i] as TextButton;
+                        if(tempObj != null)
+                        {
+                            Target.Draw(tempObj.buttonText);
                         }
                     }
                 }

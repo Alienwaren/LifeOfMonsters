@@ -19,7 +19,6 @@ namespace Life_of_Monster.Logic
         public void Draw()
         {
             target.Draw(Body);
-            
         }
         public void Draw(Vector2f pos)
         {
