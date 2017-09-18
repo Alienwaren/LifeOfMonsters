@@ -10,6 +10,7 @@ using Life_of_Monster.Logic;
 using Life_of_Monster.Managers;
 using System.IO;
 using Life_of_Monster.GUI;
+using Life_of_Monster.Characters;
 namespace Life_of_Monster
 {
     public class MainLoop
@@ -31,6 +32,8 @@ namespace Life_of_Monster
                 logger.Log(LogLevel.Trace, "Opened window");
                 sceneManager.texturesManager = textureManager;
                 sceneManager.TargetRenderWindow = window;
+                characterManager.textureManager = textureManager;
+                characterManager.target = window;
             }
             catch (Exception e)
             {
@@ -38,7 +41,7 @@ namespace Life_of_Monster
                 returnCode = -2;
                 return false;
             }
-            if(textureManager.loadAllTextures() && sceneManager.ReadSceneFilesToMemory())
+            if(textureManager.loadAllTextures() && sceneManager.ReadSceneFilesToMemory() && characterManager.LoadAllCharactersToMemory())
             {
                 GameStateManager.ActualScene = "MainMenu";
                 return true;
@@ -75,6 +78,7 @@ namespace Life_of_Monster
                         Window_Closed(this, EventArgs.Empty);
                     }
                     sceneManager.DrawActiveScene();
+                    //characterManager.DrawCharacter("Jarri");
                     window.Display();
                 }
             }
@@ -85,6 +89,7 @@ namespace Life_of_Monster
         private static Logger logger = LogManager.GetCurrentClassLogger();
         private TextureManager textureManager = new TextureManager();
         private SceneManager sceneManager = new SceneManager();
+        private CharacterManager characterManager = new CharacterManager();
         int returnCode = -1;
         GameClock clock = new GameClock(88, "GameClock", 100);
     }

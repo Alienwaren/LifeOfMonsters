@@ -21,7 +21,7 @@ namespace Life_of_Monster.Managers
         
         public bool ReadSceneFilesToMemory()
         {
-            List<string> xmlSceneFilesInDirectory = new List<String>(Directory.GetFiles(baseSceneFilesPath));
+            List<string> xmlSceneFilesInDirectory = Directory.GetFiles(baseSceneFilesPath).ToList();
             for (int i = 0; i < xmlSceneFilesInDirectory.Count; i++)
             {
                 string actualFilename = xmlSceneFilesInDirectory[i];

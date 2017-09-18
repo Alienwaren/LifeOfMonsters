@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<character>
+  <name>
+    Jarri
+  </name>
+  <surname>
+    Gentletail
+  </surname>
+  <texture>
+    Kitsune
+  </texture>
+  <affection>
+    0
+  </affection>
+  <species>
+    Kitsune
+  </species>
+  <size>
+    <x>
+      394
+    </x>
+    <y>
+      524  
+    </y>
+  </size>
+</character>

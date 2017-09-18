@@ -61,12 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters\Character.cs" />
     <Compile Include="GUI\TextButton.cs" />
     <Compile Include="Logic\Entity.cs" />
     <Compile Include="Logic\GameClock.cs" />
     <Compile Include="Logic\Renderable.cs" />
     <Compile Include="Logic\Scene.cs" />
     <Compile Include="MainLoop.cs" />
+    <Compile Include="Managers\CharacterManager.cs" />
     <Compile Include="Managers\GameStateManager.cs" />
     <Compile Include="Managers\SceneManager.cs" />
     <Compile Include="Managers\TextureManager.cs" />
@@ -74,8 +76,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CharacterFiles\Jarri.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="IMG\ExitToWindows.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMG\Kitsune.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="IMG\LoadGame.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
