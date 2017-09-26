@@ -10,6 +10,9 @@ using Life_of_Monster.Logic;
 using SFML.Graphics;
 using System.Text.RegularExpressions;
 using Life_of_Monster.GUI;
+using Life_of_Monster.Characters;
+using SFML.Window;
+
 namespace Life_of_Monster.Managers
 {
     public class SceneManager
@@ -42,6 +45,9 @@ namespace Life_of_Monster.Managers
                     int layerCount = int.Parse(scene["layerCount"].InnerText);
                     string sceneName = scene["name"].InnerText;
                     sceneName = Regex.Replace(sceneName, @"\s+", string.Empty); ///remove whites
+                    string displayGui = scene["playerControls"].InnerText;
+                    displayGui = Regex.Replace(displayGui, @"\s+", string.Empty);
+                    bool.TryParse(displayGui, out bool gui);
                     /*
                      * we are now extracting bg data
                      */
@@ -99,148 +105,171 @@ namespace Life_of_Monster.Managers
                     {
                         XmlNodeList layers = doc.GetElementsByTagName("layer");
                         XmlNode layer = layers[j];
-                        XmlNode layerTexture = layer["texture"];
-                        string layerTextureName = layerTexture["name"].InnerText;
-                        layerTextureName = Regex.Replace(layerTextureName, @"\s+", string.Empty);
                         XmlNodeList layerType = ((XmlElement)layer).GetElementsByTagName("type");
+                        ///first we need to know what layer type we need
                         string layerTypeStr = layerType[0].InnerText;
                         layerTypeStr = Regex.Replace(layerTypeStr, @"\s+", string.Empty);
-                        if (layerTypeStr == "Image")
+                        if (layerTypeStr == "Image" || layerTypeStr == "TextButton")
                         {
-                            Sprite tempomarySprite = new Sprite(texturesManager.Textures[layerTextureName]);
-                            tempScene.Layers.Add(tempomarySprite);
-                        }
-                        else if (layerTypeStr == "TextButton")
-                        {
-                            TextButton tempButton = new TextButton();
-                            tempButton.buttonText.Texture = texturesManager.Textures[layerTextureName];
-                            tempScene.Layers.Add(tempButton);
-                        }
-
-                        XmlNodeList layerOrigins = ((XmlElement)layerTexture).GetElementsByTagName("origin");
-                        XmlNodeList layerPositions = ((XmlElement)layerTexture).GetElementsByTagName("position");
-                        if (layerOrigins[0].Attributes[0].Value == "x") //first provided is x
-                        {
-                            string xStr = layerOrigins[0].InnerText;
-                            xStr = Regex.Replace(xStr, @"\s+", string.Empty);
-                            string yStr = layerOrigins[1].InnerText;
-                            yStr = Regex.Replace(yStr, @"\s+", string.Empty);
-                            int x = int.Parse(xStr);
-                            int y = int.Parse(yStr);
-                            object tempObj = tempScene.Layers[j];
-                            if(tempObj is Sprite)
+                            XmlNode layerTexture = layer["texture"];
+                            string layerTextureName = layerTexture["name"].InnerText;
+                            layerTextureName = Regex.Replace(layerTextureName, @"\s+", string.Empty);
+                           
+                            XmlNodeList layerOrigins = ((XmlElement)layerTexture).GetElementsByTagName("origin");
+                            XmlNodeList layerPositions = ((XmlElement)layerTexture).GetElementsByTagName("position");
+                            if (layerTypeStr == "Image")
                             {
-                                Sprite temp = tempObj as Sprite;
-                                if (temp != null)
-                                {
-                                    temp.Origin = new SFML.Window.Vector2f(x, y);
-                                }
-                                tempScene.Layers[j] = temp;
-
-                            }else if(tempObj is TextButton)
-                            {
-                                TextButton temp = tempObj as TextButton;
-                                if (temp != null)
-                                {
-                                    temp.buttonText.Origin = new SFML.Window.Vector2f(x, y);
-                                }
-                                tempScene.Layers[j] = temp;
+                                Sprite tempomarySprite = new Sprite(texturesManager.Textures[layerTextureName]);
+                                tempScene.Layers.Add(tempomarySprite);
                             }
-                        }
-                        else //second provided is x then
-                        {
-                            string xStr = layerPositions[1].InnerText;
-                            xStr = Regex.Replace(xStr, @"\s+", string.Empty);
-                            string yStr = layerPositions[0].InnerText;
-                            yStr = Regex.Replace(yStr, @"\s+", string.Empty);
-                            int x = int.Parse(xStr);
-                            int y = int.Parse(yStr);
-                            object tempObj = tempScene.Layers[j];
-                            if (tempObj is Sprite)
+                            else if (layerTypeStr == "TextButton")
                             {
-                                Sprite temp = tempObj as Sprite;
-                                if (temp != null)
-                                {
-                                    temp.Origin = new SFML.Window.Vector2f(x, y);
-                                }
-                                tempScene.Layers[j] = temp;
-
-                            }
-                            else if (tempObj is TextButton)
-                            {
-                                TextButton temp = tempObj as TextButton;
-                                if (temp != null)
-                                {
-                                    temp.buttonText.Origin = new SFML.Window.Vector2f(x, y);
-                                }
-                                tempScene.Layers[j] = temp;
-                            }
-                        }
-                        if (layerPositions[0].Attributes[0].Value == "x") //first provided is x
-                        {
-                            string xStr = layerPositions[0].InnerText;
-                            xStr = Regex.Replace(xStr, @"\s+", string.Empty);
-                            string yStr = layerPositions[1].InnerText;
-                            yStr = Regex.Replace(yStr, @"\s+", string.Empty);
-                            int x = int.Parse(xStr);
-                            int y = int.Parse(yStr);
-                            object tempObj = tempScene.Layers[j];
-                            if (tempObj is Sprite)
-                            {
-                                Sprite temp = tempObj as Sprite;
-                                if (temp != null)
-                                {
-                                    temp.Position = new SFML.Window.Vector2f(x, y);
-                                }
-                                tempScene.Layers[j] = temp;
-
-                            }
-                            else if (tempObj is TextButton)
-                            {
-                                TextButton temp = tempObj as TextButton;
-                                temp.Name = layerTextureName;
-                                if (temp != null)
-                                {
-                                    temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
-                                }
-                                tempScene.Layers[j] = temp;
+                                TextButton tempButton = new TextButton();
+                                tempButton.buttonText.Texture = texturesManager.Textures[layerTextureName];
+                                tempScene.Layers.Add(tempButton);
                             }
 
-                        }
-                        else //second provided is x then
-                        {
-                            string xStr = layerPositions[1].InnerText;
-                            xStr = Regex.Replace(xStr, @"\s+", string.Empty);
-                            string yStr = layerPositions[0].InnerText;
-                            yStr = Regex.Replace(yStr, @"\s+", string.Empty);
-                            int x = int.Parse(xStr);
-                            int y = int.Parse(yStr);
-                            object tempObj = tempScene.Layers[j];
-                            if (tempObj is Sprite)
+                            if (layerOrigins[0].Attributes[0].Value == "x") //first provided is x
                             {
-                                Sprite temp = tempObj as Sprite;
-                                if (temp != null)
+                                string xStr = layerOrigins[0].InnerText;
+                                xStr = Regex.Replace(xStr, @"\s+", string.Empty);
+                                string yStr = layerOrigins[1].InnerText;
+                                yStr = Regex.Replace(yStr, @"\s+", string.Empty);
+                                int x = int.Parse(xStr);
+                                int y = int.Parse(yStr);
+                                object tempObj = tempScene.Layers[j];
+                                if (tempObj is Sprite)
                                 {
-                                    temp.Position = new SFML.Window.Vector2f(x, y);
+                                    Sprite temp = tempObj as Sprite;
+                                    if (temp != null)
+                                    {
+                                        temp.Origin = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+
                                 }
-                                tempScene.Layers[j] = temp;
+                                else if (tempObj is TextButton)
+                                {
+                                    TextButton temp = tempObj as TextButton;
+                                    if (temp != null)
+                                    {
+                                        temp.buttonText.Origin = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+                                }
+                            }
+                            else //second provided is x then
+                            {
+                                string xStr = layerPositions[1].InnerText;
+                                xStr = Regex.Replace(xStr, @"\s+", string.Empty);
+                                string yStr = layerPositions[0].InnerText;
+                                yStr = Regex.Replace(yStr, @"\s+", string.Empty);
+                                int x = int.Parse(xStr);
+                                int y = int.Parse(yStr);
+                                object tempObj = tempScene.Layers[j];
+                                if (tempObj is Sprite)
+                                {
+                                    Sprite temp = tempObj as Sprite;
+                                    if (temp != null)
+                                    {
+                                        temp.Origin = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+
+                                }
+                                else if (tempObj is TextButton)
+                                {
+                                    TextButton temp = tempObj as TextButton;
+                                    if (temp != null)
+                                    {
+                                        temp.buttonText.Origin = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+                                }
+                            }
+                            if (layerPositions[0].Attributes[0].Value == "x") //first provided is x
+                            {
+                                string xStr = layerPositions[0].InnerText;
+                                xStr = Regex.Replace(xStr, @"\s+", string.Empty);
+                                string yStr = layerPositions[1].InnerText;
+                                yStr = Regex.Replace(yStr, @"\s+", string.Empty);
+                                int x = int.Parse(xStr);
+                                int y = int.Parse(yStr);
+                                object tempObj = tempScene.Layers[j];
+                                if (tempObj is Sprite)
+                                {
+                                    Sprite temp = tempObj as Sprite;
+                                    if (temp != null)
+                                    {
+                                        temp.Position = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+
+                                }
+                                else if (tempObj is TextButton)
+                                {
+                                    TextButton temp = tempObj as TextButton;
+                                    temp.Name = layerTextureName;
+                                    if (temp != null)
+                                    {
+                                        temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+                                }
 
                             }
-                            else if (tempObj is TextButton)
+                            else //second provided is x then
                             {
-                                TextButton temp = tempObj as TextButton;
-                                temp.Name = layerTextureName;
-                                if (temp != null)
+                                string xStr = layerPositions[1].InnerText;
+                                xStr = Regex.Replace(xStr, @"\s+", string.Empty);
+                                string yStr = layerPositions[0].InnerText;
+                                yStr = Regex.Replace(yStr, @"\s+", string.Empty);
+                                int x = int.Parse(xStr);
+                                int y = int.Parse(yStr);
+                                object tempObj = tempScene.Layers[j];
+                                if (tempObj is Sprite)
                                 {
-                                    temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
+                                    Sprite temp = tempObj as Sprite;
+                                    if (temp != null)
+                                    {
+                                        temp.Position = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+
                                 }
-                                tempScene.Layers[j] = temp;
+                                else if (tempObj is TextButton)
+                                {
+                                    TextButton temp = tempObj as TextButton;
+                                    temp.Name = layerTextureName;
+                                    if (temp != null)
+                                    {
+                                        temp.buttonText.Position = new SFML.Window.Vector2f(x, y);
+                                    }
+                                    tempScene.Layers[j] = temp;
+                                }
+                            }
+                        }else if(layerTypeStr == "Character")
+                        {
+                            if(characterManager != null)
+                            {
+                                Character tempCharacter = new Character();
+                                string characterName = layer["name"].InnerText;
+                                XmlNode characterPosition = layer["position"];
+                                string xStr = Regex.Replace(characterPosition["x"].InnerText, @"\s+", string.Empty); 
+                                string yStr = Regex.Replace(characterPosition["y"].InnerText, @"\s+", string.Empty);
+                                Vector2f positionsVec = new Vector2f();
+                                float.TryParse(xStr, out positionsVec.X);
+                                float.TryParse(yStr, out positionsVec.Y);
+                                characterName = Regex.Replace(characterName, @"\s+", string.Empty);
+                                tempCharacter = characterManager.GameCharacters[characterName];
+                                tempCharacter.Body.Position = positionsVec;
+                                tempScene.Layers.Add(tempCharacter);
                             }
                         }
                     }
                     tempScene.Target = TargetRenderWindow;
+                    tempScene.DisplayPlayerControls = gui;
                     tempScene.InitEvents();
-                    
                     Scenes.Add(sceneName, tempScene);
                     
                 }
@@ -279,6 +308,8 @@ namespace Life_of_Monster.Managers
         }
         private const string baseSceneFilesPath = "SceneFiles";
         public TextureManager texturesManager{ private get; set; }
+
+        public CharacterManager characterManager { private get; set; }
         public Dictionary<string, Logic.Scene> Scenes { get; private set; }
         private static Logger logger = LogManager.GetCurrentClassLogger();
         public RenderWindow TargetRenderWindow { get; set; }

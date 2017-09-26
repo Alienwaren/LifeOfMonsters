@@ -40,24 +40,18 @@ namespace Life_of_Monster.Managers
                         string characterNameStr = Regex.Replace(characterRoot["name"].InnerText, @"\s+", string.Empty);
                         string characterSurnameStr = Regex.Replace(characterRoot["surname"].InnerText, @"\s+", string.Empty);
                         string characterTextureNameStr = Regex.Replace(characterRoot["texture"].InnerText, @"\s+", string.Empty);
-                        string affectionStr = characterRoot["affection"].InnerText;
+                        string affectionStr = Regex.Replace(characterRoot["affection"].InnerText, @"\s+", string.Empty);
+                        string speciesStr = Regex.Replace(characterRoot["species"].InnerText, @"\s+", string.Empty);
                         int affection = 0;
                         int.TryParse(affectionStr, out affection);
-                        string speciesStr = Regex.Replace(characterRoot["species"].InnerText, @"\s+", string.Empty);
-                        XmlNodeList sizes = characterRoot["size"].ChildNodes;    
-                        Vector2f tempVector = new Vector2f();
-                        string xStr = Regex.Replace(sizes[0].InnerText, @"\s+", string.Empty);
-                        string yStr = Regex.Replace(sizes[1].InnerText, @"\s+", string.Empty);
-                        float.TryParse(xStr, out tempVector.X);
-                        float.TryParse(yStr, out tempVector.Y);
                         tempCharacter.Body = new Sprite(textureManager.Textures[characterTextureNameStr]);
                         tempCharacter.CharacterAffection = affection;
                         tempCharacter.CharacterName = characterNameStr;
                         tempCharacter.CharacterSurname = characterSurnameStr;
                         tempCharacter.target = this.target;
-                        tempCharacter.size = tempVector;
-                        GameCharacters.Add(characterNameStr, tempCharacter);
-                        
+                        tempCharacter.Species = speciesStr;
+                        tempCharacter.SetOriginToCenter();
+                        GameCharacters.Add(characterNameStr, tempCharacter);   
                     }
                     catch (Exception e)
                     {

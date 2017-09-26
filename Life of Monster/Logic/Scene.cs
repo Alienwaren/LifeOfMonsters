@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using Life_of_Monster.GUI;
 using Life_of_Monster.Logic;
+using Life_of_Monster.Characters;
 using Life_of_Monster.Managers;
 namespace Life_of_Monster.Logic
 {
@@ -15,6 +16,7 @@ namespace Life_of_Monster.Logic
         {
             Background = new Sprite();
             Layers = new List<object>();
+            DisplayPlayerControls = false;
         }
         public void InitEvents()
         {
@@ -37,6 +39,9 @@ namespace Life_of_Monster.Logic
                 if(temp.Name == "ExitToWindows")
                 {
                     GameStateManager.GameState = GAMESTATES.HALT;
+                }else if(temp.Name == "StartGame")
+                {
+                    GameStateManager.ActualScene = "TestMeeting";
                 }
             }
         }
@@ -63,6 +68,13 @@ namespace Life_of_Monster.Logic
                         {
                             Target.Draw(tempObj.buttonText);
                         }
+                    }else if(Layers[i] is Character)
+                    {
+                        Character tempCharacter = Layers[i] as Character;
+                        if (tempCharacter != null)
+                        {
+                            Target.Draw(tempCharacter.Body);
+                        }
                     }
                 }
             }
@@ -82,5 +94,6 @@ namespace Life_of_Monster.Logic
         public RenderWindow Target { get; set; }
         public Sprite Background { get; set; }
         public List<object> Layers { get; set; }
+        public bool DisplayPlayerControls { get; set; }
     }
 }

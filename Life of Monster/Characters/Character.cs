@@ -13,11 +13,13 @@ namespace Life_of_Monster.Characters
     public class Character : Renderable
     {
 
-        public Character(int id = 0, string characterSurname = "", string name = "")
+        public Character(int id = 0, string characterSurname = "", string name = "", string species = "")
             : base(id, name)
         {
             CharacterName = name;
             CharacterAffection = 0;
+            Species = species;
+            CharacterSurname = characterSurname;
         }
        
         public string CharacterName { get; set; }

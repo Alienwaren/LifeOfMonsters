@@ -34,14 +34,15 @@ namespace Life_of_Monster
                 sceneManager.TargetRenderWindow = window;
                 characterManager.textureManager = textureManager;
                 characterManager.target = window;
+                sceneManager.characterManager = characterManager;
             }
             catch (Exception e)
             {
-                logger.Log(LogLevel.Fatal, "Cannot open window");
+                logger.Log(LogLevel.Fatal, "Cannot open window because of: {0}", e.Message);
                 returnCode = -2;
                 return false;
             }
-            if(textureManager.loadAllTextures() && sceneManager.ReadSceneFilesToMemory() && characterManager.LoadAllCharactersToMemory())
+            if (textureManager.loadAllTextures() && characterManager.LoadAllCharactersToMemory()  && sceneManager.ReadSceneFilesToMemory())
             {
                 GameStateManager.ActualScene = "MainMenu";
                 return true;
@@ -78,7 +79,6 @@ namespace Life_of_Monster
                         Window_Closed(this, EventArgs.Empty);
                     }
                     sceneManager.DrawActiveScene();
-                    //characterManager.DrawCharacter("Jarri");
                     window.Display();
                 }
             }

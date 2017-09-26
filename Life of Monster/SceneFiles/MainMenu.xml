@@ -162,4 +162,7 @@
   <layerCount>
     5
   </layerCount>
+  <playerControls>
+    false
+  </playerControls>
 </scene>

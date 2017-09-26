@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<scene>
+  <name>
+    TestMeeting
+  </name>
+  <background>
+    <texture>
+      <name>
+        SampleMeeting
+      </name>
+      <intrect>
+        null
+      </intrect>
+      <origin axis="x">
+        0
+      </origin>
+      <origin axis="y">
+        0
+      </origin>
+      <size>
+        null
+      </size>
+      <position axis="x">
+        0
+      </position>
+      <position axis="y">
+        0
+      </position>
+      <type>
+        Image
+      </type>
+    </texture>
+  </background>
+  <layer n="0">
+    <name>
+      Jarri
+    </name>
+    <type>
+      Character
+    </type>
+    <position>
+      <x>
+        400
+      </x>
+      <y>
+        300        
+      </y>
+    </position>
+  </layer>
+  <layerCount>
+    1
+  </layerCount>
+  <playerControls>
+    true
+  </playerControls>
+</scene>

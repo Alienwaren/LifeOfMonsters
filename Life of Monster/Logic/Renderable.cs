@@ -26,13 +26,9 @@ namespace Life_of_Monster.Logic
             Body.Position = pos;
             target.Draw(Body);
         }
-        private void CalculateAndSetScale(Vector2f newSize)
+        public void SetOriginToCenter()
         {
-            Vector2f oldSize = new Vector2f(this.Body.Texture.Size.X, this.Body.Texture.Size.Y);
-            desiredSize = newSize;
-            Vector2f scaleFactor = new Vector2f(newSize.X / oldSize.X, newSize.Y / oldSize.Y);
-            this.Body.Scale = scaleFactor;
-            this.Body.Origin = new Vector2f(this.Body.GetGlobalBounds().Width / 2, this.Body.GetGlobalBounds().Height / 2);
+            Body.Origin = new Vector2f(Body.GetGlobalBounds().Width / 2, Body.GetGlobalBounds().Height / 2);
         }
         public Sprite Body { get; set; }
         public RenderWindow target { get; set; }
@@ -42,7 +38,7 @@ namespace Life_of_Monster.Logic
         public Vector2f size
         {
             get { return desiredSize; }
-            set { CalculateAndSetScale(value); }
+            set { desiredSize = value; }
         }
     }
 }
