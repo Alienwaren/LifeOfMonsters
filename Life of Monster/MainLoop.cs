@@ -42,7 +42,7 @@ namespace Life_of_Monster
                 returnCode = -2;
                 return false;
             }
-            if (textureManager.loadAllTextures() && characterManager.LoadAllCharactersToMemory()  && sceneManager.ReadSceneFilesToMemory())
+            if (textureManager.loadAllTextures() && characterManager.LoadAllCharactersToMemory() && sceneManager.ReadSceneFilesToMemory() && playerGuiManager.GuiSheetsToMemory() && playerGuiManager.PrepareGuiElements())
             {
                 GameStateManager.ActualScene = "MainMenu";
                 return true;
@@ -68,7 +68,6 @@ namespace Life_of_Monster
             ///          
             if (Init())
             {
-                
                 returnCode = 0;
                 while(window.IsOpen())
                 {
@@ -90,6 +89,7 @@ namespace Life_of_Monster
         private TextureManager textureManager = new TextureManager();
         private SceneManager sceneManager = new SceneManager();
         private CharacterManager characterManager = new CharacterManager();
+        private PlayerGuiManager playerGuiManager = new PlayerGuiManager();
         int returnCode = -1;
         GameClock clock = new GameClock(88, "GameClock", 100);
     }

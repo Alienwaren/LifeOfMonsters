@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<gui>
+  <sourceSheet>
+    GuiElementsSheet
+  </sourceSheet>
+  <textarea>
+    <name>
+     DialogueArea
+    </name>
+    <origin>
+      <x>
+        0
+      </x>
+      <y>
+        0
+      </y>
+    </origin>
+    <rect>
+      <width>
+        657
+      </width>
+      <height>
+        323
+      </height>
+    </rect>
+    <position>
+      <x>
+        0
+      </x>
+      <y>
+        0
+      </y>
+    </position>
+  </textarea>
+</gui>
